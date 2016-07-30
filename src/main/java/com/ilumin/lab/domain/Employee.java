@@ -13,7 +13,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "emp_no")
-    private Integer empNo;
+    private Integer empNo = null;
 
     @Column(name = "birth_date")
     private Date birthDate;
