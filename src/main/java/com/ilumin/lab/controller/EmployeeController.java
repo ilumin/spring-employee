@@ -8,13 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/employees")
 public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public Iterable<Employee> getEmployees(
             @RequestParam(name = "page", defaultValue = "1", required = false) Integer page,
             @RequestParam(name = "size", defaultValue = "20", required = false) Integer size
@@ -23,14 +22,14 @@ public class EmployeeController {
         return employeeRepository.findAll(pageable);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
     public Employee getEmployee(
             @PathVariable Integer id
     ) {
         return employeeRepository.findOne(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/employees", method = RequestMethod.POST)
     public Employee newEmployee(@RequestBody Employee employeeData) {
         Employee employee = new Employee();
         employee.setBirthDate(employeeData.getBirthDate());
@@ -39,6 +38,26 @@ public class EmployeeController {
         employee.setGender(employeeData.getGender());
         employee.setHireDate(employeeData.getHireDate());
         return employeeRepository.save(employee);
+    }
+
+    @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
+    public Employee updateEmployee(
+            @PathVariable Integer id,
+            @RequestBody Employee employeeData
+    ) {
+        Employee employee = employeeRepository.findOne(id);
+        employee.setBirthDate(employeeData.getBirthDate());
+        employee.setFirstName(employeeData.getFirstName());
+        employee.setLastName(employeeData.getLastName());
+        employee.setGender(employeeData.getGender());
+        employee.setHireDate(employeeData.getHireDate());
+        return employeeRepository.save(employee);
+    }
+
+    @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE)
+    public void removeEmployee(@PathVariable Integer id) {
+        Employee employee = employeeRepository.findOne(id);
+        employeeRepository.delete(employee);
     }
 
 }
