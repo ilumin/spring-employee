@@ -37,3 +37,8 @@ dependencies {
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+task buildRunDocker(dependsOn: 'war', type: Exec) {
+	executable 'sh'
+	args '-c', 'docker cp build/libs/ROOT.war scm-tomcat:/app'
+}
