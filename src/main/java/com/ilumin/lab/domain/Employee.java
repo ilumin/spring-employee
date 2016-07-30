@@ -2,10 +2,7 @@ package com.ilumin.lab.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -27,7 +24,7 @@ public class Employee {
     private String lastName;
 
     @Column(name = "gender")
-    private String gender;
+    private Character gender;
 
     @Column(name = "hire_date")
     private Date hireDate;
