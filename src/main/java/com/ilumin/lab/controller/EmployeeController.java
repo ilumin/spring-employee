@@ -5,12 +5,7 @@ import com.ilumin.lab.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/employees")
@@ -26,6 +21,13 @@ public class EmployeeController {
     ) {
         Pageable pageable = new PageRequest(page<=0 ? 0 : page - 1, size);
         return employeeRepository.findAll(pageable);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Employee getEmployee(
+            @PathVariable Integer id
+    ) {
+        return employeeRepository.findOne(id);
     }
 
 }
