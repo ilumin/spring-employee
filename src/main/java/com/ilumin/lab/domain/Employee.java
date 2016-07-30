@@ -11,6 +11,7 @@ import java.util.Date;
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "emp_no")
     private Integer empNo;
 
