@@ -19,6 +19,7 @@ URL: https://github.com/datacharmer/test_db
 
 - API แสดงข้อมูลของ Employee 
 - API[Employee] แสดงหลาย titles (ตำแหน่งงาน)
+- API[Employee] ทำ CRUD ข้อมูล titles ผ่านทาง `/employees/{id}/titles`
 
 ## Create a New Project With Spring Cli
 เราสามารถสร้างโปรเจคจาก UI ของ IntelliJ หรือจาก http://start.spring.io/ ก็ได้  
