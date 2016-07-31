@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
@@ -21,9 +20,6 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-
-    @Autowired
-    EntityLinks entityLinks;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public Resource<Page<Employee>> getEmployees(
@@ -48,16 +44,16 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.POST)
-    public Employee newEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
+    public Resource<Employee> newEmployee(@RequestBody Employee employee) {
+        return responseAsResource(employeeService.createEmployee(employee));
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
-    public Employee updateEmployee(
+    public Resource<Employee> updateEmployee(
             @PathVariable Integer id,
             @RequestBody Employee employeeData
     ) {
-        return employeeService.updateEmployee(id, employeeData);
+        return responseAsResource(employeeService.updateEmployee(id, employeeData));
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE)
