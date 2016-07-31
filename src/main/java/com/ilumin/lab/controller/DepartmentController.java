@@ -22,9 +22,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @RequestMapping(value = "/departments", method = RequestMethod.GET)
-    public Resource<Page<Department>> getDepartments(
-            Pageable pageable
-    ) {
+    public Resource<Page<Department>> getDepartments(Pageable pageable) {
         Page<Department> departments = departmentService.fetchDepartment(pageable);
         for (Department department : departments) {
             Link self = linkTo(methodOn(DepartmentController.class).getDepartment(department.getDeptNo())).withSelfRel();
