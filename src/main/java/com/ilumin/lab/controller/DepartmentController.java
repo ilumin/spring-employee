@@ -4,11 +4,13 @@ import com.ilumin.lab.domain.Department;
 import com.ilumin.lab.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -21,16 +23,14 @@ public class DepartmentController {
 
     @RequestMapping(value = "/departments", method = RequestMethod.GET)
     public Resource<Page<Department>> getDepartments(
-            @RequestParam(name = "page", defaultValue = "1", required = false) Integer page,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+            Pageable pageable
     ) {
-        Pageable pageable = new PageRequest(page<=0 ? 0 : page - 1, size);
         Page<Department> departments = departmentService.fetchDepartment(pageable);
         for (Department department : departments) {
             Link self = linkTo(methodOn(DepartmentController.class).getDepartment(department.getDeptNo())).withSelfRel();
             department.add(self);
         }
-        Link self = linkTo(methodOn(DepartmentController.class).getDepartments(page, size)).withSelfRel();
+        Link self = linkTo(methodOn(DepartmentController.class).getDepartments(pageable)).withSelfRel();
         return new Resource<>(departments, self);
     }
 
