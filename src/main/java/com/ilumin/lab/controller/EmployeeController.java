@@ -16,7 +16,7 @@ public class EmployeeController {
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public Iterable<Employee> getEmployees(
             @RequestParam(name = "page", defaultValue = "1", required = false) Integer page,
-            @RequestParam(name = "size", defaultValue = "20", required = false) Integer size
+            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
     ) {
         Pageable pageable = new PageRequest(page<=0 ? 0 : page - 1, size);
         return employeeService.fetchEmployee(pageable);

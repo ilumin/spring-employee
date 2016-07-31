@@ -1,11 +1,9 @@
 package com.ilumin.lab.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -14,15 +12,15 @@ import java.util.Date;
 @Table(name = "titles")
 public class Title {
 
-    @Id
-    @Column(name = "emp_no")
-    private Integer empNo;
+    @EmbeddedId
+    @JsonIgnore
+    private TitlePK titlePK;
 
     @Size(max = 50)
     @Column(name = "title")
     private String title;
 
-    @Column(name = "from_date")
+    @Column(name = "from_date", insertable = false, updatable = false)
     private Date fromDate;
 
     @Column(name = "to_date")
