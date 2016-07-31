@@ -1,6 +1,7 @@
 package com.ilumin.lab.service;
 
 import com.ilumin.lab.domain.Employee;
+import com.ilumin.lab.domain.Salary;
 import com.ilumin.lab.domain.Title;
 import com.ilumin.lab.repository.EmployeeRepository;
 import com.ilumin.lab.repository.SalaryRepository;
@@ -60,5 +61,17 @@ public class EmployeeService {
         }
         titleRepository.save(titleData);
         return showTitles(id);
+    }
+
+    public Iterable<Salary> showSalaries(Integer id) {
+        return salaryRepository.findByEmpNo(id);
+    }
+
+    public Iterable<Salary> addSalary(Integer id, Salary salaryData) throws Exception {
+        if (!Objects.equals(salaryData.getEmpNo(), id)) {
+            throw new Exception("Employee No not match");
+        }
+        salaryRepository.save(salaryData);
+        return showSalaries(id);
     }
 }
