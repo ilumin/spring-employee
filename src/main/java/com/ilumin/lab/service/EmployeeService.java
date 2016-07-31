@@ -1,7 +1,9 @@
 package com.ilumin.lab.service;
 
 import com.ilumin.lab.domain.Employee;
+import com.ilumin.lab.domain.Title;
 import com.ilumin.lab.repository.EmployeeRepository;
+import com.ilumin.lab.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ public class EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    TitleRepository titleRepository;
 
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
@@ -39,4 +44,7 @@ public class EmployeeService {
         employeeRepository.delete(employee);
     }
 
+    public Iterable<Title> showTitles(Integer id) {
+        return titleRepository.findByEmpNo(id);
+    }
 }

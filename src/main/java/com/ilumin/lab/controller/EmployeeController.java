@@ -1,6 +1,7 @@
 package com.ilumin.lab.controller;
 
 import com.ilumin.lab.domain.Employee;
+import com.ilumin.lab.domain.Title;
 import com.ilumin.lab.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -45,6 +46,11 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE)
     public void removeEmployee(@PathVariable Integer id) {
         employeeService.deleteEmployee(id);
+    }
+
+    @RequestMapping(value = "/employees/{id}/titles", method = RequestMethod.GET)
+    public Iterable<Title> showTitles(@PathVariable Integer id) {
+        return employeeService.showTitles(id);
     }
 
 }
