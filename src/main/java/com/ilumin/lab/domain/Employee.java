@@ -32,7 +32,7 @@ public class Employee {
     @Column(name = "hire_date")
     private Date hireDate;
 
-    @OneToMany(targetEntity = Title.class, mappedBy = "titlePK.empNo")
+    @OneToMany(targetEntity = Title.class, mappedBy = "empNo")
     private List<Title> titles = new ArrayList<Title>();
 
 }
