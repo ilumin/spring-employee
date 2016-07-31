@@ -28,7 +28,7 @@ public class EmployeeTitleController {
 
     private Resource<Iterable<Title>> responseAsResource(Integer id, Iterable<Title> titles) {
         Link self = linkTo(methodOn(EmployeeTitleController.class).showTitles(id)).withSelfRel();
-        Link employee = linkTo(methodOn(EmployeeController.class).getEmployee(id)).withSelfRel();
+        Link employee = linkTo(methodOn(EmployeeController.class).getEmployee(id)).withRel("employee");
         return new Resource<>(titles, self, employee);
     }
 

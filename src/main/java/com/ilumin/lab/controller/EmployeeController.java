@@ -64,7 +64,7 @@ public class EmployeeController {
     private Resource<Employee> responseAsResource(Employee employee) {
         Link self = linkTo(methodOn(EmployeeController.class).getEmployee(employee.getEmpNo())).withSelfRel();
         Link titles = linkTo(methodOn(EmployeeTitleController.class).showTitles(employee.getEmpNo())).withRel("titles");
-        Link salaries = linkTo(methodOn(EmployeeSalaryController.class).showSalaries(employee.getEmpNo())).withRel("salaries");
+        Link salaries = linkTo(methodOn(EmployeeSalaryController.class).showSalaries(employee.getEmpNo(), 1, 5)).withRel("salaries");
         return new Resource<>(employee, self, titles, salaries);
     }
 }

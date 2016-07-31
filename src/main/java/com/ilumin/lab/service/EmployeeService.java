@@ -8,6 +8,7 @@ import com.ilumin.lab.repository.SalaryRepository;
 import com.ilumin.lab.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -64,11 +65,15 @@ public class EmployeeService {
         return showTitles(id);
     }
 
-    public Iterable<Salary> showSalaries(Integer id) {
-        return salaryRepository.findByEmpNo(id);
+    public Page<Salary> showSalaries(Integer id, Pageable pageable) {
+        return salaryRepository.findByEmpNo(id, pageable);
     }
 
-    public Iterable<Salary> addSalary(Integer id, Salary salaryData) throws Exception {
+    public Page<Salary> showSalaries(Integer id) {
+        return showSalaries(id, new PageRequest(1, 5));
+    }
+
+    public Page<Salary> addSalary(Integer id, Salary salaryData) throws Exception {
         if (!Objects.equals(salaryData.getEmpNo(), id)) {
             throw new Exception("Employee No not match");
         }
