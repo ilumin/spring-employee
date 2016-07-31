@@ -15,6 +15,12 @@
 ### Prepare Example Data 
 URL: https://github.com/datacharmer/test_db  
 
+## API Description
+
+- API แสดงข้อมูลของ Employee 
+- Employee มีหลาย titles (ตำแหน่งงาน)
+- API[Employee] แสดงตำแหน่งงานล่าสุดเท่านั้น
+
 ## Create a New Project With Spring Cli
 เราสามารถสร้างโปรเจคจาก UI ของ IntelliJ หรือจาก http://start.spring.io/ ก็ได้  
 แต่นี่ไม่ใช่ยุคสมัยที่เราจะต้องมานั่งสร้างโปรเจคจาก UI หรือเว็บแล้ว เราต้องสร้างจาก cli  
