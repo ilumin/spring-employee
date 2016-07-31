@@ -30,13 +30,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.POST)
-    public Employee newEmployee(@RequestBody Employee employeeData) {
-        Employee employee = new Employee();
-        employee.setBirthDate(employeeData.getBirthDate());
-        employee.setFirstName(employeeData.getFirstName());
-        employee.setLastName(employeeData.getLastName());
-        employee.setGender(employeeData.getGender());
-        employee.setHireDate(employeeData.getHireDate());
+    public Employee newEmployee(@RequestBody Employee employee) {
         return employeeRepository.save(employee);
     }
 

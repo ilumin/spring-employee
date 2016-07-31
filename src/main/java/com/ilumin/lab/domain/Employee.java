@@ -11,9 +11,9 @@ import java.util.Date;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "emp_no")
-    private Integer empNo = null;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "emp_no", nullable = false, unique = true)
+    private Integer empNo;
 
     @Column(name = "birth_date")
     private Date birthDate;
