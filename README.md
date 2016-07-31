@@ -18,8 +18,7 @@ URL: https://github.com/datacharmer/test_db
 ## API Description
 
 - API แสดงข้อมูลของ Employee 
-- Employee มีหลาย titles (ตำแหน่งงาน)
-- API[Employee] แสดงตำแหน่งงานล่าสุดเท่านั้น
+- API[Employee] แสดงหลาย titles (ตำแหน่งงาน)
 
 ## Create a New Project With Spring Cli
 เราสามารถสร้างโปรเจคจาก UI ของ IntelliJ หรือจาก http://start.spring.io/ ก็ได้  
