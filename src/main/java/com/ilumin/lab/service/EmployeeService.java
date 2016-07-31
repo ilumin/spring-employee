@@ -3,6 +3,7 @@ package com.ilumin.lab.service;
 import com.ilumin.lab.domain.Employee;
 import com.ilumin.lab.domain.Title;
 import com.ilumin.lab.repository.EmployeeRepository;
+import com.ilumin.lab.repository.SalaryRepository;
 import com.ilumin.lab.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,9 @@ public class EmployeeService {
 
     @Autowired
     TitleRepository titleRepository;
+
+    @Autowired
+    SalaryRepository salaryRepository;
 
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);

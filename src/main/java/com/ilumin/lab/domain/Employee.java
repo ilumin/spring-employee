@@ -35,4 +35,7 @@ public class Employee {
     @OneToMany(targetEntity = Title.class, mappedBy = "empNo")
     private List<Title> titles = new ArrayList<Title>();
 
+    @Transient
+    private List<Salary> salaries = new ArrayList<Salary>();
+
 }
