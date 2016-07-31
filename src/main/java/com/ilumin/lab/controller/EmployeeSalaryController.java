@@ -20,13 +20,13 @@ public class EmployeeSalaryController {
     private EmployeeService employeeService;
 
     @RequestMapping(value = "/employees/{id}/salaries", method = RequestMethod.GET)
-    public Resource<Page<Salary>> showSalaries(
-            @PathVariable Integer id,
-            @RequestParam(name = "page", defaultValue = "1", required = false) Integer page,
-            @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
-    ) {
-        Pageable pageable = new PageRequest(page<=0 ? 0 : page - 1, size);
+    public Resource<Page<Salary>> showSalaries(@PathVariable Integer id, Pageable pageable) {
         return responseAsResource(id, employeeService.showSalaries(id, pageable));
+    }
+
+    public Resource<Page<Salary>> showSalaries(Integer id) {
+        Pageable pageable = new PageRequest(1, 5);
+        return showSalaries(id, pageable);
     }
 
     @RequestMapping(value = "/employees/{id}/salaries", method = RequestMethod.POST)
@@ -35,7 +35,7 @@ public class EmployeeSalaryController {
     }
 
     private Resource<Page<Salary>> responseAsResource(Integer id, Page<Salary> salaries) {
-        Link self = linkTo(methodOn(EmployeeSalaryController.class).showSalaries(id, salaries.getNumber(), salaries.getSize())).withSelfRel();
+        Link self = linkTo(methodOn(EmployeeSalaryController.class).showSalaries(id, salaries.previousPageable())).withSelfRel();
         Link employee = linkTo(methodOn(EmployeeController.class).getEmployee(id)).withRel("employee");
         return new Resource<>(salaries, self, employee);
     }
