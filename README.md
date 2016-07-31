@@ -59,3 +59,11 @@ URL: https://github.com/datacharmer/test_db
 - `api-employee` ตัวสุดท้าย กำหนดให้สร้าง Project ใน folder ชื่อ `api-employee` 
   ซึ่งถ้าไม่ได้กำหนดไว้ มันจะสร้างเป็น zip file เหมือนตอนที่สร้างใน start.spring.io
   
+## NOTE
+
+- ใช้ OneToMany สำหรับการดึง Employee's title 
+  ให้ per page = 5
+  ผลลัพท์
+  ทำ query 7 ครั้ง คือ 1. CHECK EMPTY employee 1 ครั้ง 2. SELECT LIMIT employee 1 ครั้ง 3. SELECT title จาก employee 5 ครั้ง
+  ถ้าเขียนปกติ ก็คงเขียนวนลูปแบบนี้
+  ถ้าเขียนเทพๆหน่อย ก็คงใช้ SELECT title IN employee 1 ครั้ง แล้วลูปเก็บ resource
