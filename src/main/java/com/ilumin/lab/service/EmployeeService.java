@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class EmployeeService {
 
@@ -46,5 +48,13 @@ public class EmployeeService {
 
     public Iterable<Title> showTitles(Integer id) {
         return titleRepository.findByEmpNo(id);
+    }
+
+    public Iterable<Title> addTitle(Integer id, Title titleData) throws Exception {
+        if (!Objects.equals(titleData.getEmpNo(), id)) {
+            throw new Exception("Employee No not match");
+        }
+        titleRepository.save(titleData);
+        return showTitles(id);
     }
 }

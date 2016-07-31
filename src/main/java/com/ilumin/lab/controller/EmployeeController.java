@@ -53,4 +53,9 @@ public class EmployeeController {
         return employeeService.showTitles(id);
     }
 
+    @RequestMapping(value = "/employees/{id}/titles", method = RequestMethod.POST)
+    public Iterable<Title> addTitle(@PathVariable Integer id, @RequestBody Title titleData) throws Exception {
+        return employeeService.addTitle(id, titleData);
+    }
+
 }
