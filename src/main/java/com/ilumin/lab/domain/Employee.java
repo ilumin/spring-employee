@@ -1,6 +1,8 @@
 package com.ilumin.lab.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,9 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee extends ResourceSupport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

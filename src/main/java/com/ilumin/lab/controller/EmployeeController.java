@@ -1,10 +1,9 @@
 package com.ilumin.lab.controller;
 
 import com.ilumin.lab.domain.Employee;
-import com.ilumin.lab.domain.Salary;
-import com.ilumin.lab.domain.Title;
 import com.ilumin.lab.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityLinks;
@@ -27,12 +26,18 @@ public class EmployeeController {
     EntityLinks entityLinks;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
-    public Iterable<Employee> getEmployees(
+    public Resource<Page<Employee>> getEmployees(
             @RequestParam(name = "page", defaultValue = "1", required = false) Integer page,
             @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
     ) {
         Pageable pageable = new PageRequest(page<=0 ? 0 : page - 1, size);
-        return employeeService.fetchEmployee(pageable);
+        Page<Employee> employees = employeeService.fetchEmployee(pageable);
+        for (Employee employee : employees) {
+            Link self = linkTo(methodOn(EmployeeController.class).getEmployee(employee.getEmpNo())).withSelfRel();
+            employee.add(self);
+        }
+        Link self = linkTo(methodOn(EmployeeController.class).getEmployees(page, size)).withSelfRel();
+        return new Resource<>(employees, self);
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
@@ -62,8 +67,8 @@ public class EmployeeController {
 
     private Resource<Employee> responseAsResource(Employee employee) {
         Link self = linkTo(methodOn(EmployeeController.class).getEmployee(employee.getEmpNo())).withSelfRel();
-        Link titles = linkTo(methodOn(EmployeeTitleController.class).showTitles(employee.getEmpNo())).withRel("all-titles");
-        Link salaries = linkTo(methodOn(EmployeeSalaryController.class).showSalaries(employee.getEmpNo())).withRel("all-salaries");
+        Link titles = linkTo(methodOn(EmployeeTitleController.class).showTitles(employee.getEmpNo())).withRel("titles");
+        Link salaries = linkTo(methodOn(EmployeeSalaryController.class).showSalaries(employee.getEmpNo())).withRel("salaries");
         return new Resource<>(employee, self, titles, salaries);
     }
 }

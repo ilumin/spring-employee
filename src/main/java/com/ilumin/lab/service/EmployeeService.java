@@ -7,6 +7,7 @@ import com.ilumin.lab.repository.EmployeeRepository;
 import com.ilumin.lab.repository.SalaryRepository;
 import com.ilumin.lab.repository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class EmployeeService {
         return employeeRepository.findOne(id);
     }
 
-    public Iterable<Employee> fetchEmployee(Pageable pageable) {
+    public Page<Employee> fetchEmployee(Pageable pageable) {
         return employeeRepository.findAll(pageable);
     }
 
