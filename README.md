@@ -15,11 +15,16 @@
 ### Prepare Example Data 
 URL: https://github.com/datacharmer/test_db  
 
+## DB Structure
+![DB Structure](https://dev.mysql.com/doc/employee/en/images/employees-schema.png)
+
 ## API Description
 
 - API แสดงข้อมูลของ Employee 
 - API[Employee] แสดงหลาย titles (ตำแหน่งงาน)
 - API[Employee] ทำ CRUD ข้อมูล titles ผ่านทาง `/employees/{id}/titles`
+- Department has many Employees
+- Employee may has many Departments
 
 ## Create a New Project With Spring Cli
 เราสามารถสร้างโปรเจคจาก UI ของ IntelliJ หรือจาก http://start.spring.io/ ก็ได้  
