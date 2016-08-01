@@ -20,4 +20,15 @@ public class DepartmentService {
     public Department getDepartment(String deptNo) {
         return departmentRepository.findOne(deptNo);
     }
+
+    public Department createDepartment(Department department) {
+        return departmentRepository.save(department);
+    }
+
+    public void deleteDepartment(String deptNo) {
+        Department department = departmentRepository.findOne(deptNo);
+        departmentRepository.deleteManager(deptNo);
+        departmentRepository.deleteEmployee(deptNo);
+        departmentRepository.delete(department);
+    }
 }
